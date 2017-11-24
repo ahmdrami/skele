@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Dev environment",
   "scripts": {
-    "prestart": "node buildscripts/premessage",
-    "start": "npm-run-all --parallel security-check open:src ",
-    "open:src": " node buildscripts/server",
+    "prestart": "babel-node buildscripts/premessage",
+    "start": "npm-run-all --parallel security-check open:src lint:watch",
+    "open:src": " babel-node buildscripts/server",
+    "lint": "esw webpack.config.* src buildscripts  --color",
+    "lint:watch": "npm run lint -- --watch",
     "security-check": "nsp check",
     "localtunnel": "lt --port 3000",
     "share": "npm-run-all --parallel open:src localtunnel"
